@@ -1,0 +1,131 @@
+<style>
+. {
+  margin: 0 top;
+  padding: 0;
+}
+
+table{
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+tr:nth-child(even){
+  background: white;
+}
+
+tr:hover{
+  background: white;
+}
+
+th{
+  background: green;
+  color: white;
+}
+
+th, td{
+  border-bottom: 1px solid white;
+}
+
+th, td {
+  padding: 15px;
+  text-align: left;
+}
+
+th{
+  text-align: left;
+}
+
+td{
+  height: 50px;
+  vertical-align: bottom;
+}
+
+.maxWidth{
+  max-width: 800px;
+  width: 100%
+}
+
+.input{
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  outline-color: green;
+  color: green;
+  font-weight: bold;
+}
+</style>
+
+<body>
+  <div id="dvTabela" class="maxwidth">
+    <input type="text" id="txtBusca" placeholder="Buscar..." class="maxWidth input" />
+    <table>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>E-mail</th>
+          <th>Telefone</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+  <script>
+    //Popular a tabela
+
+     var dados = [
+   ["Gunnar Correa", "gunnercorrea@gmail.com", "18-998090900", "Ativo"],
+   ["Angélica Correa", "angelica@site.com", "18-988090900", "Ativo"],
+   ["Natália Moura", "natalia@moura.com", "18-998090900", "Bloqueado"],
+   ["Fabricio", "fabricio@gmail.com", "18-998096900", "Ativo"],
+   ["Douglas Silva", "douglassilva@site.com", "18-598090900", "Ativo"],
+   ["Marcos Dias", "mascosdias@gmail.com", "18-998890970", "Bloqueado"],
+   ["Luiz Carlos", "luiz@site.com", "15 - 998090900 ", "Ativo"]
+ ];
+
+ var tbody = document.getElementById("tbody");
+ for (var i = 0; i < dados.length; i++) {
+   var tr = "<tr>" +
+     "<td>" + dados[i][0] + "</td>" +
+     "<td>" + dados[i][1] + "</td>" +
+     "<td>" + dados[i][2] + "</td>" +
+     "<td>" + dados[i][3] + "</td>" +
+     "</tr>";
+
+   tbody.innerHTML += tr;
+
+   var tr = tbody.childNodes;
+
+ }
+ //Fim popular a tabela
+
+ document.getElementById("txtBusca").addEventListener("keyup", function() {
+   var busca = document.getElementById("txtBusca").value.toLowerCase();
+
+   for (var i = 0; i < tbody.childNodes.length; i++) {
+     var achou = false;
+     var tr = tbody.childNodes[i];
+
+     var td = tr.childNodes;
+
+     for (var j = 0; j < td.length; j++) {
+       var value = td[j].childNodes[0].nodeValue.toLowerCase();
+
+       if (value.indexOf(busca) >= 0) {
+         achou = true;
+       }
+     }
+     if (achou) {
+       tr.style.display = "table-row";
+     } else {
+       tr.style.display = "none";
+     }
+   }
+ });
+  </script>
+</body>
